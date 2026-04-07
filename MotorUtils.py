@@ -1,9 +1,5 @@
 import pigpio
 
-pi1 = pigpio.pi()
-
-SERVO_PIN = 18
-
 # FS90R Pulse Widths (µs):
 # 1500 = Stop
 # 700 to 1500 = Clockwise (lower is faster)
