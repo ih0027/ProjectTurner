@@ -1,4 +1,5 @@
 import pigpio
+import time
 
 # FS90R Pulse Widths (µs):
 # 1500 = Stop
@@ -31,3 +32,9 @@ class FS90R:
         """Stops running the servo and releases pigpio resources"""
         self.pi.set_servo_pulsewidth(self.servoPin, 0)
         self.pi.stop()
+
+    def runForTime(self, speed: float, runTime:float):
+        """Runs the servo at the designed speed for the designated time"""
+        self.run(speed)
+        time.sleep(runTime)
+        self.run(0)
