@@ -8,10 +8,11 @@ import time
 
 class FS90R:
     """A class to represent an FS90R servo"""
-    def __init__(self, pi: pigpio.pi, servoPin: int):
+    def __init__(self, pi: pigpio.pi, servoPin: int, stopFrequency = 1500):
         self.pi: pigpio.pi = pi
         self.servoPin: int = servoPin
         self.inverted = False
+        self.stopFrequency = stopFrequency
 
     def setInverted(self, inverted: bool):
         """Sets whether to invert commands to the motor"""
@@ -25,7 +26,7 @@ class FS90R:
             speed = 1
         if speed < -1:
             speed = -1
-        speed = (800 * speed) + 700
+        speed = (500 * speed) + self.stopFrequency
         self.pi.set_servo_pulsewidth(self.servoPin, speed)
     
     def dealocate(self):

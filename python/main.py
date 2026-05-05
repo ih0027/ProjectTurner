@@ -4,11 +4,11 @@ import pigpio
 import time
 
 #Turn timing constants
-TURN_LEFT_TIME = 1
+TURN_LEFT_TIME = 0.65
 TURN_RIGHT_TIME = TURN_LEFT_TIME
 
 #Spool timing constants
-RETRACT_SPOOL_TIME = 1
+RETRACT_SPOOL_TIME = 1.4
 EXTEND_SPOOL_TIME = RETRACT_SPOOL_TIME
 
 #Other timing constants
@@ -17,10 +17,10 @@ END_PAUSE_TIME = 1
 
 #Initialize hardware
 pi = pigpio.pi()
-spoolServoPin = 18
-turnServoPin = 20
-spoolServo = FS90R(pi, spoolServoPin)
-turnServo = FS90R(pi, turnServoPin)
+spoolServoPin = 3
+turnServoPin = 2
+spoolServo = FS90R(pi, spoolServoPin, stopFrequency= 1435)
+turnServo = FS90R(pi, turnServoPin, stopFrequency=1495)
 spoolServo.setInverted(False)
 turnServo.setInverted(True)
 
@@ -32,6 +32,7 @@ def runServoForTimeAndPause(servo: FS90R, runPower: float, runTime: float):
     time.sleep(PAUSE_TIME)
 
 def turnPageForward():
+    global resolvingInput
     """Turns the page forward. Forward is defined as taking the right page and moving it to the left"""
     if resolvingInput:
         return
@@ -44,6 +45,7 @@ def turnPageForward():
     resolvingInput = False
 
 def turnPageReverse():
+    global resolvingInput
     """NOT CURRENTLY IMPLEMENTED:  Turns the page backward. Backward is defined as taking the left page and moving it to the right."""
     if resolvingInput:
         return
