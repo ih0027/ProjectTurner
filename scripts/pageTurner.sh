@@ -1,4 +1,3 @@
-#TODO add initialization to connect to bluetooth device
-
+#!/bin/bash
 #Run script
-sudo python3 main.py
+python3 /home/pi/pageTurner/main.py

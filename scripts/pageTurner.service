@@ -3,12 +3,12 @@ Description=Page Turner Script
 After=network.target pigpiod.service
 
 [Service]
-ExecStart=/home/pi/your_script.sh
-WorkingDirectory=/home/pi
+ExecStart=/home/pi/pageTurner/pageTurner.sh
+WorkingDirectory=/home/pi/pageTurner
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
-User=pi
+User=root
 
 [Install]
 WantedBy=multi-user.target
