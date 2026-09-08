@@ -1,6 +1,11 @@
+#Install pigpio
+sudo apt-get update
+sudo apt-get install -y pigpio python3
+
 #Start and enable pigpio service
-sudo pigpiod
+sudo systemctl daemon-reload
 sudo systemctl enable pigpiod
+sudo systemctl start pigpiod  
 
 #Install required python libraries
 python3 -m pip install pigpio keyboard --break-system-packages
